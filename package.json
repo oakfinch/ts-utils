@@ -31,6 +31,7 @@
   "homepage": "https://github.com/oakfinch/ts-utils#readme",
   "devDependencies": {
     "@microsoft/tsdoc": "^0.13.2",
+    "@oakfinch/ts-extra": "^1.0.4",
     "@types/jest": "^27.0.2",
     "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.32.0",
