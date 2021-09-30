@@ -1,0 +1,11 @@
+{
+  "entryPoints": ["src/index.ts"],
+  "out": "docs",
+  "excludeInternal": true,
+  "readme": "./README.hbs",
+  "intentionallyNotExported": [
+    "UnionToTuple",
+    "LastOfUnion",
+    "DefinedLength"
+  ]
+}
