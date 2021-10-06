@@ -1,6 +1,6 @@
 {
   "name": "@oakfinch/ts-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Utility library with enhanced TypeScript support",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
