@@ -5,6 +5,37 @@ import {
 import { CUSTOM_PROMISIFIED_ARGS_SYMBOL } from './constants';
 import { hasOwnProperty } from './has-own-property';
 
+/**
+ * Takes in a callback-based function and returns a promise-based function
+ *
+ * The callback must be a node-style callback whose first argument is an
+ * error when the function fails, or null when it succeeds. The second argument
+ * is the result.
+ *
+ * @param fn the callback-based function to promisify
+ * @returns a promise-based function
+ * @example
+ * ```
+ * // https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback
+ * import { readFile } from 'fs'
+ * import { promisify } from '@oakfinch/ts-utils'
+ *
+ * // reading a file using a promisified `readFile`
+ * const readFilePromise = promisify(readFile)
+ * const contents = await readFilePromise('/some/file', 'utf8')
+ *
+ * // reading a file using the callback-based `readFile`
+ * const contents = await new Promise((resolve, reject) => {
+ *   readFile('/some/file', 'utf8', (err, data) => {
+ *     if (err) {
+ *       reject(err)
+ *     } else {
+ *       resolve(data)
+ *     }
+ *   })
+ * })
+ * ```
+ */
 export function promisify<
     TArgs extends any[],
     TReturn extends any[],

@@ -14,7 +14,7 @@
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
     "test": "jest",
-    "pre-push": "npm run lint; npm run typecheck; npm run test; npm run build:docs; git add ./docs/*; git commit -m 'auto-updating docs pre-push' || true"
+    "pre-push": "npm run lint; npm run typecheck; npm run test; npm run build:docs; git add ./docs/*; git commit --ammend || true"
   },
   "repository": {
     "type": "git",
