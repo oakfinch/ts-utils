@@ -95,3 +95,5 @@ Promise<[any, undefined] | [undefined, T]>
 
   return [undefined, arg];
 }
+
+export default to;
