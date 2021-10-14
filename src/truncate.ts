@@ -1,3 +1,6 @@
+/**
+ * Truncates a string
+ */
 export const truncate = (
   str: string,
   maxLength: number,
