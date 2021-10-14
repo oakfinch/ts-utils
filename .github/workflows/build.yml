@@ -6,10 +6,10 @@ name: Build
 on:
   push:
     tags-ignore:
-      - 'v*.*.*'
+      - v*
   pull_request:
     tags-ignore:
-      - 'v*.*.*'
+      - v*
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
