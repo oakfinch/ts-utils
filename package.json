@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "build": "rm -rf dist; tsc",
+    "build": "rm -rf dist; tsc --build tsconfig.json tsconfig.esm.json",
     "build:docs": "typedoc",
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
