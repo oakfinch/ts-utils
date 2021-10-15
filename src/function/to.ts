@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isPromise } from './is-promise';
-import { isFunction } from './is-function';
+import { isPromise } from '../type-guards/is-promise';
+import { isFunction } from '../type-guards/is-function';
 
 /**
  * A helper for handling awkward try/catch blocks

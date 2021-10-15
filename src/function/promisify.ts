@@ -3,7 +3,7 @@ import {
   AnyFunction, FromEntries, MergeArrays, FromArgs,
 } from '@oakfinch/ts-extra';
 import { CUSTOM_PROMISIFIED_ARGS_SYMBOL } from './constants';
-import { hasOwnProperty } from './has-own-property';
+import { hasOwnProperty } from '../type-guards/has-own-property';
 
 /**
  * Takes in a callback-based function and returns a promise-based function
