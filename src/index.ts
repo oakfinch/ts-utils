@@ -1,4 +1,5 @@
 export * from './ellipsis';
+export * from './get-promise';
 export * from './has-own-property';
 export * from './is-function';
 export * from './is-included';
