@@ -6,8 +6,8 @@ import { isFunction } from './is-function';
  * A helper for handling awkward try/catch blocks
  *
  * @param fn - a function that has no arguments and returns a promise
- * @returns a promise that resolves to [reason, undefined] if the promise rejects,
- *          and [undefined, value] if the promise resolves
+ * @returns a promise that resolves to [undefined, error] if the promise rejects,
+ *          and [value, undefined] if the promise resolves
  * @example
  * ```
  * // instead of:
@@ -19,15 +19,15 @@ import { isFunction } from './is-function';
  * }
  *
  * // you can do:
- * const [error, value = 'some fallback'] = await to(() => getValue(12345));
+ * const [value = 'some fallback', error] = await to(() => getValue(12345));
  *
  * ```
  */
-export function to<T>(fn: () => Promise<T>): Promise<[unknown, undefined] | [undefined, T]>;
+export function to<T>(fn: () => Promise<T>): Promise<[T, undefined] | [undefined, unknown]>;
 /**
  * A helper for handling awkward try/catch blocks
  * @param fn - a function that has no arguments
- * @returns [error, undefined] if function throws an error, and [undefined, value] if it succeeds
+ * @returns [undefined, error] if function throws an error, and [value, undefined] if it succeeds
  * @example
  * ```
  * // instead of:
@@ -39,16 +39,16 @@ export function to<T>(fn: () => Promise<T>): Promise<[unknown, undefined] | [und
  * }
  *
  * // you can do:
- * const [error, value = 'some fallback'] = to(() => getValue(12345));
+ * const [value = 'some fallback', error] = to(() => getValue(12345));
  *
  * ```
  */
-export function to<T>(fn: () => T): [unknown, undefined] | [undefined, T];
+export function to<T>(fn: () => T): [T, undefined] | [undefined, unknown];
 /**
  * A helper for handling awkward try/catch blocks
  *
  * @param promise - a promise
- * @returns [error, undefined] if the promise rejects, and [undefined, value] if it resolves
+ * @returns [undefined, error] if the promise rejects, and [value, undefined] if it resolves
  * @example
  * ```
  * // instead of:
@@ -60,40 +60,40 @@ export function to<T>(fn: () => T): [unknown, undefined] | [undefined, T];
  * }
  *
  * // you can do:
- * const [error, value = 'some fallback'] = to(somePromise);
+ * const [value = 'some fallback', error] = to(somePromise);
  *
  * ```
  */
-export function to<T>(promise: Promise<T>): Promise<[unknown, undefined] | [undefined, T]>;
+export function to<T>(promise: Promise<T>): Promise<[T, undefined] | [undefined, unknown]>;
 export function to<
   T,
   U0 extends () => Promise<T>,
   U1 extends () => T,
 >(arg: U0 | U1 | Promise<T> | T): (
-[any, undefined] |
-[undefined, T] |
-Promise<[any, undefined] | [undefined, T]>
+[T, undefined] |
+[undefined, unknown] |
+Promise<[T, undefined] | [undefined, unknown]>
 ) {
   if (isPromise(arg)) {
     return arg.then(
-      (resolved) => [undefined, resolved],
-      (error) => [error, undefined],
+      (value) => [value, undefined],
+      (error) => [undefined, error],
     );
   }
 
   if (isFunction(arg)) {
     try {
-      const result = arg();
-      if (isPromise(result)) {
-        return to(result);
+      const value = arg();
+      if (isPromise(value)) {
+        return to(value);
       }
-      return [undefined, result];
+      return [value, undefined];
     } catch (error) {
-      return [error, undefined];
+      return [undefined, error];
     }
   }
 
-  return [undefined, arg];
+  return [arg, undefined];
 }
 
 export default to;
