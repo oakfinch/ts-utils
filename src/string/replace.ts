@@ -1,24 +1,40 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Replacer = (substring: string, ...args: any[]) => string;
-type SearchValue = string | RegExp;
-type SearchReplaceMap = { [index: string]: string | Replacer };
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * Alias of String.replace
  */
-export function replace(source: string, searchValue: SearchValue, replacer: Replacer): string;
+export function replace(
+  source: string,
+  searchValue: string | RegExp,
+  replacer: (substring: string, ...args: any[]) => string,
+): string;
+
 /**
  * Alias of String.replace
  */
-export function replace(source: string, searchValue: SearchValue, replaceValue: string): string;
+export function replace(
+  source: string,
+  searchValue: string | RegExp,
+  replaceValue: string
+): string;
+
 /**
  * Iterates over `searchReplaceMap`, calling source.replace(key, value) for each entry
  * in the object
  */
-export function replace(source: string, searchReplaceMap: SearchReplaceMap): string;
 export function replace(
   source: string,
-  ...rest: [SearchValue, string | Replacer] | [SearchReplaceMap]
+  searchReplaceMap: { [index: string]: string | ((substring: string, ...args: any[]) => string) }
+): string;
+
+export function replace(
+  source: string,
+  ...rest: [
+    string | RegExp,
+    string | ((substring: string, ...args: any[]) => string),
+  ] | [
+    { [index: string]: string | ((substring: string, ...args: any[]) => string) },
+  ]
 ): string {
   return (rest.length === 2)
     ? source.replace(...rest as Parameters<string['replace']>)
