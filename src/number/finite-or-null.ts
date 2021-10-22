@@ -1,15 +1,11 @@
-type FiniteOrNull<T extends number> =
-  Exclude<number, T> extends never
-    ? T | null
-    : T;
-
-/** Return `null` if `num` is Infinity, -Infinity, or NaN */
+/**
+ * Returns `num` as-is, unless `num` is Infinity, -Infinity, or NaN,
+ * in which case it returns `null`
+ */
 export const finiteOrNull = <T extends number>(
   num: T,
-): FiniteOrNull<T> => (
-    Number.isFinite(num)
-      ? num
-      : null
-  ) as FiniteOrNull<T>;
+): Exclude<number, T> extends never ? T | null : T => (
+    Number.isFinite(num) ? num : null
+  ) as Exclude<number, T> extends never ? T | null : T;
 
 export default finiteOrNull;

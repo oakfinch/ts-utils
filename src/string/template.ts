@@ -1,7 +1,7 @@
 import { Value } from '@oakfinch/ts-extra';
 
 /**
- * Template literal that returns a string render function
+ * Simple tagged template literal that returns a string render function
  *
  * @example
  * ```
