@@ -1,7 +1,7 @@
 import { Index } from '@oakfinch/ts-extra';
 
 /**
- * Type-garded Object.hasOwnProperty
+ * Type-garded property check
  *
  * @param obj the object
  * @param prop the property to check
@@ -13,17 +13,17 @@ import { Index } from '@oakfinch/ts-extra';
  * // Property 'foo' does not exist on type '{ foo: "foo"; } | { bar: "bar"; }'
  * console.log(obj.foo);
  *
- * if (hasOwnProperty(obj, 'foo')) {
+ * if (hasProperty(obj, 'foo')) {
  *   // ok!
  *   console.log(obj.foo);
  * }
  * ```
  */
-export const hasOwnProperty = <
+export const hasProperty = <
   TProp extends Index,
   TValue,
   U,
   V extends Record<TProp, TValue>,
->(obj: U | V, prop: TProp): obj is V => Object.hasOwnProperty.call(obj, prop);
+>(obj: U | V, prop: TProp): obj is V => prop in obj;
 
-export default hasOwnProperty;
+export default hasProperty;
