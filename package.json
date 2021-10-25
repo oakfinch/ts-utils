@@ -13,7 +13,7 @@
     "prepare": "husky install",
     "build": "rm -rf dist; tsc --build tsconfig.json tsconfig.esm.json",
     "build:docs": "typedoc",
-    "lint": "eslint src",
+    "lint": "eslint --ext js,cjs,mjs,ts,jsx,tsx,json . && prettier -c \"**\"",
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "pre-push": "npm run lint && npm run typecheck && npm run test && npm run build:docs && git add ./docs/* &&  (git commit --amend --no-edit || true)"
@@ -32,20 +32,23 @@
   },
   "homepage": "https://github.com/oakfinch/ts-utils#readme",
   "devDependencies": {
-    "@oakfinch/eslint-config": "^1.0.4",
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
+    "@oakfinch/commitlint-config": "^1.0.0",
+    "@oakfinch/eslint-config": "^1.1.7",
     "@oakfinch/jest-config": "^1.0.1",
+    "@oakfinch/lint-staged-config": "^1.0.0",
+    "@oakfinch/prettier-config": "^1.0.4",
     "@oakfinch/ts-extra": "^1.0.13",
-    "@oakfinch/tsconfig": "^1.0.7",
+    "@oakfinch/tsconfig": "^1.0.10",
     "@types/jest": "^27.0.2",
-    "@types/lodash": "^4.14.176",
     "eslint": "^7.32.0",
-    "husky": "^7.0.2",
+    "husky": "^7.0.4",
     "jest": "^27.2.4",
+    "prettier": "^1.19.1",
     "ts-jest": "^27.0.5",
     "typedoc": "^0.22.4",
     "typescript": "^4.4.3"
   },
-  "dependencies": {
-    "lodash": "^4.17.21"
-  }
+  "dependencies": {}
 }

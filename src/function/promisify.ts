@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
+import type {
   AnyFunction, FromEntries, MergeArrays, FromArgs,
 } from '@oakfinch/ts-extra';
 import { CUSTOM_PROMISIFIED_ARGS_SYMBOL } from './constants';
