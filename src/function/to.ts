@@ -65,19 +65,13 @@ export function to<T>(fn: () => T): [T, undefined] | [undefined, unknown];
  * ```
  */
 export function to<T>(promise: Promise<T>): Promise<[T, undefined] | [undefined, unknown]>;
-export function to<
-  T,
-  U0 extends () => Promise<T>,
-  U1 extends () => T,
->(arg: U0 | U1 | Promise<T> | T): (
-[T, undefined] |
-[undefined, unknown] |
-Promise<[T, undefined] | [undefined, unknown]>
-) {
+export function to<T, U0 extends () => Promise<T>, U1 extends () => T>(
+  arg: U0 | U1 | Promise<T> | T
+): [T, undefined] | [undefined, unknown] | Promise<[T, undefined] | [undefined, unknown]> {
   if (isPromise(arg)) {
     return arg.then(
-      (value) => [value, undefined],
-      (error) => [undefined, error],
+      value => [value, undefined],
+      error => [undefined, error]
     );
   }
 

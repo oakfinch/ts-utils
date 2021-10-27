@@ -1,7 +1,8 @@
 # ts-utils
+
 Utility library with enhanced TypeScript support
 
-------
+---
 
 [![license](https://badgen.net/github/license/oakfinch/ts-utils)](https://github.com/oakfinch/ts-utils/blob/main/LICENSE)
 [![TypeScript](https://badgen.net/badge/icon/TypeScript?icon=typescript&label=)](https://www.typescriptlang.org/)
@@ -14,12 +15,13 @@ Utility library with enhanced TypeScript support
 [![latest release on github](https://badgen.net/github/release/oakfinch/ts-utils?icon=github&label=)](https://github.com/oakfinch/ts-utils/releases/latest)
 [![minified + gzipped](https://badgen.net/bundlephobia/minzip/@oakfinch/ts-utils?label=minified%20%2B%20gzipped)](https://bundlephobia.com/package/@oakfinch/ts-utils)
 
-------
+---
 
-[![github](https://badgen.net/badge/icon/github?icon=github&scale=2&label=)](https://github.com/oakfinch/ts-utils/) | 
+[![github](https://badgen.net/badge/icon/github?icon=github&scale=2&label=)](https://github.com/oakfinch/ts-utils/)
+|
 [![docs](https://badgen.net/badge/%F0%9F%93%8B/documentation?scale=2)](https://oakfinch.github.io/ts-utils/modules.html)
 
-------
+---
 
 ## Installation
 

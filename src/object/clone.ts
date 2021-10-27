@@ -1,4 +1,4 @@
-import { AnyArray, AnyObject } from '@oakfinch/ts-extra';
+import type { AnyArray, AnyObject } from '@oakfinch/ts-extra';
 import { isObject, isArray } from '../type-guards';
 
 const cloneHelper = <T>(obj: T, cache = new Map()): T => {
@@ -24,7 +24,7 @@ const cloneHelper = <T>(obj: T, cache = new Map()): T => {
   if (isArray(obj)) {
     const cloned = [] as AnyArray;
     cache.set(obj, cloned);
-    obj.forEach((item) => cloned.push(cloneHelper(item, cache)));
+    obj.forEach(item => cloned.push(cloneHelper(item, cache)));
     return cloned as unknown as T;
   }
 

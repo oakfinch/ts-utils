@@ -18,7 +18,7 @@
  *
  * ```
  */
-export const safe = <T>(fn: () => T): (T | undefined) => {
+export const safe = <T>(fn: () => T): T | undefined => {
   try {
     return fn();
   } catch {

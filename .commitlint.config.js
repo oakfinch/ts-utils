@@ -1,5 +1,3 @@
 module.exports = {
-  extends: [
-      '@oakfinch/commitlint-config'
-  ]
-}
+  extends: ['@oakfinch/commitlint-config'],
+};

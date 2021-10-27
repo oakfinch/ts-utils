@@ -3,7 +3,6 @@ import type { Last } from '@oakfinch/ts-extra';
 /**
  * Returns the last item of an array
  *
- * @param arr
  * @example
  * ```
  * const array = ['foo', 'bar'] as const;
