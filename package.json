@@ -17,6 +17,7 @@
     "lint:fix": "eslint --ext js,cjs,mjs,ts,jsx,tsx,json --fix .",
     "typecheck": "tsc --noEmit",
     "test": "jest",
+    "commit-msg": "commitlint -e",
     "pre-commit": "npx lint-staged",
     "pre-push": "npm run lint && npm run typecheck && npm run test && npm run build:docs && git add ./docs/* &&  (git commit --amend --no-edit || true)"
   },
