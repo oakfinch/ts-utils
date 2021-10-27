@@ -1,3 +1,3 @@
 module.exports = {
-  "*": "eslint -c"
+  "*": "eslint"
 };
