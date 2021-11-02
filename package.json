@@ -43,7 +43,7 @@
     "@oakfinch/lint-staged-config": "^1.0.0",
     "@oakfinch/prettier-config": "^1.0.4",
     "@oakfinch/ts-extra": "^1.0.17",
-    "@oakfinch/tsconfig": "^1.0.10",
+    "@oakfinch/tsconfig": "^1.0.11",
     "@types/jest": "^27.0.2",
     "eslint": "^7.32.0",
     "husky": "^7.0.4",
