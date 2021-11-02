@@ -38,7 +38,7 @@
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
     "@oakfinch/commitlint-config": "^1.0.0",
-    "@oakfinch/eslint-config": "^1.1.10",
+    "@oakfinch/eslint-config": "^1.1.12",
     "@oakfinch/jest-config": "^1.0.2",
     "@oakfinch/lint-staged-config": "^1.0.0",
     "@oakfinch/prettier-config": "^1.0.4",
