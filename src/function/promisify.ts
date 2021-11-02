@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AnyFunction, FromEntries, MergeArrays, FromArgs } from '@oakfinch/ts-extra';
-import { CUSTOM_PROMISIFIED_ARGS_SYMBOL } from './constants';
-import { hasOwnProperty } from '../type-guards/has-own-property';
 
 /**
  * Takes in a callback-based function and returns a promise-based function
@@ -39,15 +37,13 @@ export function promisify<
   TReturn extends any[],
   TCustomNames extends readonly string[]
 >(
-  fn: ((...args: [...TArgs, (error: any, ...rest: TReturn) => any]) => any) & {
-    [CUSTOM_PROMISIFIED_ARGS_SYMBOL]: TCustomNames;
-  }
+  fn: (...args: [...TArgs, (error: any, ...rest: TReturn) => any]) => any,
+  keys: TCustomNames
 ): (...args: TArgs) => Promise<FromEntries<MergeArrays<TCustomNames, FromArgs<TReturn>>>>;
 
 export function promisify<TReturn extends any[], TCustomNames extends readonly string[]>(
-  fn: ((cb: (error: any, ...rest: TReturn) => any) => any) & {
-    [CUSTOM_PROMISIFIED_ARGS_SYMBOL]: TCustomNames;
-  }
+  fn: (cb: (error: any, ...rest: TReturn) => any) => any,
+  keys: TCustomNames
 ): () => Promise<FromEntries<MergeArrays<TCustomNames, FromArgs<TReturn>>>>;
 
 export function promisify<TArgs extends any[], TReturn>(
@@ -64,14 +60,16 @@ export function promisify<TArgs extends any[]>(
 
 export function promisify(fn: (cb: (error: any) => any) => any): () => Promise<void>;
 
-export function promisify<T extends AnyFunction>(fn: T): (...args: any[]) => Promise<any> {
+export function promisify<T extends AnyFunction>(
+  fn: T,
+  keys?: string[]
+): (...args: any[]) => Promise<any> {
   return (...args: any[]) =>
     new Promise((resolve, reject) => {
       fn(...args, (error: any, ...rest: any[]) => {
         if (error) {
           reject(error);
-        } else if (rest.length > 1 && hasOwnProperty(fn, CUSTOM_PROMISIFIED_ARGS_SYMBOL)) {
-          const keys = fn[CUSTOM_PROMISIFIED_ARGS_SYMBOL] as string[];
+        } else if (keys) {
           resolve(
             Object.fromEntries(
               keys

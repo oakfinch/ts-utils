@@ -19,12 +19,14 @@ export const getPromise = <T = void>(): {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   reject: (reason?: any) => void;
 } => {
-  let resolve: (value: T | PromiseLike<T>) => void = () => {};
-  let reject: (reason?: unknown) => void = () => {};
+  let resolve: (value: T | PromiseLike<T>) => void;
+  let reject: (reason?: unknown) => void;
   const promise = new Promise<T>((res, rej) => {
     resolve = res;
     reject = rej;
   });
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return { promise, resolve, reject };
 };
 

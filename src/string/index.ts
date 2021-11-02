@@ -1,5 +1,6 @@
 export * from './capitalize';
 export * from './ellipsis';
+export * from './lowercase';
 export * from './quote';
 export * from './replace';
 export * from './template';

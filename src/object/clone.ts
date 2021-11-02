@@ -1,45 +1,45 @@
-import type { AnyArray, AnyObject } from '@oakfinch/ts-extra';
-import { isObject, isArray } from '../type-guards';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { isObject, isArray, isPrimitive } from '../type-guards';
+import { safe } from '../function/safe';
 
-const cloneHelper = <T>(obj: T, cache = new Map()): T => {
-  if (['undefined', 'number', 'string', 'boolean'].includes(typeof obj)) {
+const jsonClone = <T>(obj: T) =>
+  safe(() => (isObject(obj) || isArray(obj) ? JSON.parse(JSON.stringify(obj)) : undefined));
+
+const arrayClone = <T>(cache: Map<any, any>, clone: <U>(obj: U) => U, obj: T) =>
+  isArray(obj)
+    ? obj.reduce((acc: any[], item) => {
+        acc.push(clone(item));
+        return acc;
+      }, cache.set(obj, []).get(obj))
+    : undefined;
+
+const objectClone = <T>(cache: Map<any, any>, clone: <U>(obj: U) => U, obj: T): T | undefined =>
+  isObject(obj)
+    ? Object.entries(obj).reduce(
+        (acc, [key, value]) => Object.assign(acc, { [clone(key)]: clone(value) }),
+        cache.set(obj, {}).get(obj)
+      )
+    : undefined;
+
+const cloneHelper = <T, U extends Map<any, any>>(cache: U, obj: T): T => {
+  if (isPrimitive(obj)) {
     return obj;
   }
 
-  if (typeof obj === 'object' && obj === null) {
-    return obj;
+  const result =
+    cache.get(obj) ??
+    jsonClone(obj) ??
+    arrayClone(cache, <T0>(o: T0): T0 => cloneHelper(cache, o), obj) ??
+    objectClone(cache, <T0>(o: T0): T0 => cloneHelper(cache, o), obj);
+
+  if (typeof result === 'undefined') {
+    throw new Error('could not clone object');
   }
 
-  if (cache.has(obj)) {
-    return cache.get(obj) as T;
-  }
-
-  try {
-    const cloned = JSON.parse(JSON.stringify(obj)) as T;
-    cache.set(obj, cloned);
-    return cloned;
-    // eslint-disable-next-line no-empty
-  } catch {}
-
-  if (isArray(obj)) {
-    const cloned = [] as AnyArray;
-    cache.set(obj, cloned);
-    obj.forEach(item => cloned.push(cloneHelper(item, cache)));
-    return cloned as unknown as T;
-  }
-
-  if (isObject(obj)) {
-    const cloned = {} as AnyObject;
-    cache.set(obj, cloned);
-    Object.entries(obj).forEach(([key, value]) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      cloned[cloneHelper(key, cache)] = cloneHelper(value, cache);
-    });
-    return cloned as unknown as T;
-  }
-
-  throw new Error('could not clone object');
+  return result;
 };
 
-export const clone = <T>(obj: T): T => cloneHelper(obj);
+export const clone = <T>(obj: T): T => cloneHelper(new Map(), obj);
 export default clone;

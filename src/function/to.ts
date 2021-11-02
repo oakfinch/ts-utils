@@ -65,6 +65,7 @@ export function to<T>(fn: () => T): [T, undefined] | [undefined, unknown];
  * ```
  */
 export function to<T>(promise: Promise<T>): Promise<[T, undefined] | [undefined, unknown]>;
+export function to<T>(arg: T): [T, undefined];
 export function to<T, U0 extends () => Promise<T>, U1 extends () => T>(
   arg: U0 | U1 | Promise<T> | T
 ): [T, undefined] | [undefined, unknown] | Promise<[T, undefined] | [undefined, unknown]> {

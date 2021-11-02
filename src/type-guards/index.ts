@@ -9,6 +9,7 @@ export * from './is-null';
 export * from './is-nullish';
 export * from './is-number';
 export * from './is-object';
+export * from './is-primitive';
 export * from './is-promise';
 export * from './is-set';
 export * from './is-string';
