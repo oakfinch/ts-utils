@@ -26,6 +26,7 @@ import { isFunction } from '../type-guards/is-function';
 export function to<T>(fn: () => Promise<T>): Promise<[T, undefined] | [undefined, unknown]>;
 /**
  * A helper for handling awkward try/catch blocks
+ *
  * @param fn - a function that has no arguments
  * @returns [undefined, error] if function throws an error, and [value, undefined] if it succeeds
  * @example
@@ -60,7 +61,7 @@ export function to<T>(fn: () => T): [T, undefined] | [undefined, unknown];
  * }
  *
  * // you can do:
- * const [value = 'some fallback', error] = to(somePromise);
+ * const [value = 'some fallback', error] = await to(somePromise);
  *
  * ```
  */
