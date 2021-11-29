@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Returns a promise along with the `resolve` and `reject` methods that
  * control it.
@@ -15,18 +16,24 @@
  */
 export const getPromise = <T = void>(): {
   promise: Promise<T>;
-  resolve: (value: T | PromiseLike<T>) => void;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  reject: (reason?: any) => void;
+  resolve: (value: T) => T;
+  reject: (reason?: any) => never;
 } => {
-  let resolve: (value: T | PromiseLike<T>) => void;
-  let reject: (reason?: unknown) => void;
+  // these default assignments are reassigned immediately in the body of the
+  // promise, so they will never be called.
+  let resolve = undefined as unknown as (value: T) => T;
+  let reject = undefined as unknown as (reason?: any) => never;
+
   const promise = new Promise<T>((res, rej) => {
-    resolve = res;
-    reject = rej;
+    resolve = value => {
+      res(value);
+      return value;
+    };
+    reject = reason => {
+      rej(reason);
+      return undefined as never;
+    };
   });
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   return { promise, resolve, reject };
 };
 
