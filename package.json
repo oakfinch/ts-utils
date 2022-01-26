@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "build": "rm -rf dist; tsc --build tsconfig.json tsconfig.esm.json --excludeFiles *.test.ts",
+    "build": "rm -rf dist; npx rollup -c",
     "build:docs": "typedoc",
     "lint": "eslint --ext js,cjs,mjs,ts,jsx,tsx,json .",
     "lint:fix": "eslint --ext js,cjs,mjs,ts,jsx,tsx,json --fix .",
