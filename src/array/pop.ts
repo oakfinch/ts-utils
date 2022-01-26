@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Value } from '@oakfinch/ts-extra';
-import { last } from './last';
+import type { Value } from '@oakfinch/ts-extra'
+import { last } from './last'
 
 /**
  * Similar to Array.pop, but returns an array along with the "popped" item
@@ -26,6 +26,6 @@ export const pop = <T extends readonly any[]>(
 ): T extends readonly [...infer T0, infer T1] ? [T1, T0] : [Value<T>, Value<T>[]] =>
   [last(arr), arr.slice(0, arr.length - 1)] as T extends readonly [...infer T0, infer T1]
     ? [T1, T0]
-    : [Value<T>, Value<T>[]];
+    : [Value<T>, Value<T>[]]
 
-export default pop;
+export default pop

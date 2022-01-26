@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { AnyFunction, FromEntries, MergeArrays, FromArgs } from '@oakfinch/ts-extra';
+import type { AnyFunction, FromEntries, MergeArrays, FromArgs } from '@oakfinch/ts-extra'
 
 /**
  * Takes in a callback-based function and returns a promise-based function
@@ -39,26 +39,26 @@ export function promisify<
 >(
   fn: (...args: [...TArgs, (error: any, ...rest: TReturn) => any]) => any,
   keys: TCustomNames
-): (...args: TArgs) => Promise<FromEntries<MergeArrays<TCustomNames, FromArgs<TReturn>>>>;
+): (...args: TArgs) => Promise<FromEntries<MergeArrays<TCustomNames, FromArgs<TReturn>>>>
 
 export function promisify<TReturn extends any[], TCustomNames extends readonly string[]>(
   fn: (cb: (error: any, ...rest: TReturn) => any) => any,
   keys: TCustomNames
-): () => Promise<FromEntries<MergeArrays<TCustomNames, FromArgs<TReturn>>>>;
+): () => Promise<FromEntries<MergeArrays<TCustomNames, FromArgs<TReturn>>>>
 
 export function promisify<TArgs extends any[], TReturn>(
   fn: (...args: [...TArgs, (error: any, value: TReturn | undefined, ...rest: any[]) => any]) => any
-): (...args: TArgs) => Promise<TReturn>;
+): (...args: TArgs) => Promise<TReturn>
 
 export function promisify<TReturn>(
   fn: (cb: (error: any, value: TReturn | undefined, ...rest: any[]) => any) => any
-): () => Promise<TReturn>;
+): () => Promise<TReturn>
 
 export function promisify<TArgs extends any[]>(
   fn: (...args: [...TArgs, (error: any) => any]) => any
-): (...args: TArgs) => Promise<void>;
+): (...args: TArgs) => Promise<void>
 
-export function promisify(fn: (cb: (error: any) => any) => any): () => Promise<void>;
+export function promisify(fn: (cb: (error: any) => any) => any): () => Promise<void>
 
 export function promisify<T extends AnyFunction>(
   fn: T,
@@ -69,7 +69,7 @@ export function promisify<T extends AnyFunction>(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
       fn(...args, (error: any, ...rest: any[]) => {
         if (error) {
-          reject(error);
+          reject(error)
         } else if (keys) {
           resolve(
             Object.fromEntries(
@@ -78,16 +78,16 @@ export function promisify<T extends AnyFunction>(
                 .map((key, index) => [key, rest[index]])
                 .slice(0, rest.length)
             )
-          );
+          )
         } else if (rest.length === 1) {
-          resolve(rest[0]);
+          resolve(rest[0])
         } else {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          resolve();
+          resolve()
         }
-      });
-    });
+      })
+    })
 }
 
-export default promisify;
+export default promisify

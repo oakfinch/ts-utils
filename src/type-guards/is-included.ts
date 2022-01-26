@@ -1,4 +1,4 @@
-import type { ArrayItem, AnyArray } from '@oakfinch/ts-extra';
+import type { ArrayItem, AnyArray } from '@oakfinch/ts-extra'
 
 /**
  * Type-garded Array.includes
@@ -20,6 +20,6 @@ import type { ArrayItem, AnyArray } from '@oakfinch/ts-extra';
 export const isIncluded = <T extends Readonly<AnyArray>, U extends ArrayItem<T>, V>(
   item: U | V,
   array: T
-): item is U => array.includes(item);
+): item is U => array.includes(item)
 
-export default isIncluded;
+export default isIncluded

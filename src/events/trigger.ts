@@ -1,8 +1,8 @@
 export const trigger = <T>(name: string, detail?: T) => {
   if (typeof window === 'undefined') {
-    return;
+    return
   }
-  window?.document?.dispatchEvent(new CustomEvent(name, { detail }));
-};
+  window?.document?.dispatchEvent(new CustomEvent(name, { detail }))
+}
 
-export default trigger;
+export default trigger

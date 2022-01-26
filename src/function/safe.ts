@@ -20,10 +20,10 @@
  */
 export const safe = <T>(fn: () => T): T | undefined => {
   try {
-    return fn();
+    return fn()
   } catch {
-    return undefined;
+    return undefined
   }
-};
+}
 
-export default safe;
+export default safe

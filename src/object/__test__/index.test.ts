@@ -1,5 +1,5 @@
-import * as index from '..';
+import * as index from '..'
 
 test('index', () => {
-  expect(index).toHaveProperty('clone');
-});
+  expect(index).toHaveProperty('clone')
+})

@@ -1,5 +1,5 @@
-import type { Last } from '@oakfinch/ts-extra';
-import { reverse } from '../array/reverse';
+import type { Last } from '@oakfinch/ts-extra'
+import { reverse } from '../array/reverse'
 
 /* eslint-disable prettier/prettier, @typescript-eslint/no-explicit-any */
 /**
@@ -37,13 +37,13 @@ export function pipe<T0 extends (...args: any[]) => any, T1 extends (arg: Return
 export function pipe<T extends ((...args: any[]) => any)[]>(...fns: T): (...args: any[]) => any {
   /* eslint-enable prettier/prettier, @typescript-eslint/no-explicit-any */
   if (fns.length === 0) {
-    throw new Error('pipe requires at least one argument');
+    throw new Error('pipe requires at least one argument')
   }
   if (fns.length === 1) {
-    return fns[0];
+    return fns[0]
   }
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
-  return (...args) => fns.reduce((prev, fn, i) => (i === 0 ? fn(...args) : fn(prev)), 0);
+  return (...args) => fns.reduce((prev, fn, i) => (i === 0 ? fn(...args) : fn(prev)), 0)
 }
 
 /* eslint-disable prettier/prettier, @typescript-eslint/no-explicit-any */
@@ -82,9 +82,9 @@ export function compose<T0 extends (...args: any[]) => any, T1 extends (arg: Ret
 export function compose(...fns: ((...args: any[]) => any)[]): ((...args: any[]) => any) {
   /* eslint-enable prettier/prettier, @typescript-eslint/no-explicit-any */
   if (fns.length === 0) {
-    throw new Error('compose requires at least one argument');
+    throw new Error('compose requires at least one argument')
   }
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return pipe(...reverse(fns));
+  return pipe(...reverse(fns))
 }

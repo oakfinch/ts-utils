@@ -1,5 +1,5 @@
-import * as index from '..';
+import * as index from '..'
 
 test('index', () => {
-  expect(index).toHaveProperty('finiteOrNull');
-});
+  expect(index).toHaveProperty('finiteOrNull')
+})

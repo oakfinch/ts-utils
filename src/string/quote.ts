@@ -12,15 +12,15 @@
  * quote('hello', '<', '>') // returns `<hello>`
  * ```
  */
-export function quote<T extends string>(str: T): `"${T}"`;
-export function quote<T extends string, Q extends string>(str: T, quo: Q): `${Q}${T}${Q}`;
+export function quote<T extends string>(str: T): `"${T}"`
+export function quote<T extends string, Q extends string>(str: T, quo: Q): `${Q}${T}${Q}`
 export function quote<T extends string, L extends string, R extends string>(
   str: T,
   lquo: L,
   rquo: R
-): `${L}${T}${R}`;
+): `${L}${T}${R}`
 export function quote(str: string, lquo = '"', rquo = lquo): string {
-  return `${lquo}${str}${rquo}`;
+  return `${lquo}${str}${rquo}`
 }
 
-export default quote;
+export default quote

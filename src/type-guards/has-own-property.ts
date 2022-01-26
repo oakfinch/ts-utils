@@ -1,4 +1,4 @@
-import type { Index } from '@oakfinch/ts-extra';
+import type { Index } from '@oakfinch/ts-extra'
 
 /**
  * Type-garded Object.hasOwnProperty
@@ -22,6 +22,6 @@ import type { Index } from '@oakfinch/ts-extra';
 export const hasOwnProperty = <TProp extends Index, TValue, U, V extends Record<TProp, TValue>>(
   obj: U | V,
   prop: TProp
-): obj is V => Object.hasOwnProperty.call(obj, prop);
+): obj is V => Object.hasOwnProperty.call(obj, prop)
 
-export default hasOwnProperty;
+export default hasOwnProperty

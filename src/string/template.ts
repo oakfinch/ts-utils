@@ -1,4 +1,4 @@
-import type { Value } from '@oakfinch/ts-extra';
+import type { Value } from '@oakfinch/ts-extra'
 
 /**
  * Simple tagged template literal that returns a string render function
@@ -22,6 +22,6 @@ export const template =
     strings
       .map((str, index) => [str, expressions[index]] as [string, Value<T>])
       .map(([str, exp]) => [str, replacements[exp] ?? ''].join(''))
-      .join('');
+      .join('')
 
-export default template;
+export default template
