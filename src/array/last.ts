@@ -1,4 +1,4 @@
-import type { Last } from '@oakfinch/ts-extra';
+import type { Last } from '@oakfinch/ts-extra'
 
 /**
  * Returns the last item of an array
@@ -17,6 +17,6 @@ import type { Last } from '@oakfinch/ts-extra';
  * const fizzbuzz = obj[last(array)];
  * ```
  */
-export const last = <T, U extends readonly T[]>(arr: U): Last<U> => arr[arr.length - 1];
+export const last = <T, U extends readonly T[]>(arr: U): Last<U> => arr[arr.length - 1]
 
-export default last;
+export default last

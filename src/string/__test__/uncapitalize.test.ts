@@ -1,7 +1,7 @@
-import { uncapitalize } from '../uncapitalize';
+import { uncapitalize } from '../uncapitalize'
 
 describe('uncapitalize', () => {
   test('works', () => {
-    expect(uncapitalize('Hello World')).toBe('hello World');
-  });
-});
+    expect(uncapitalize('Hello World')).toBe('hello World')
+  })
+})

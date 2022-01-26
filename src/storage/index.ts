@@ -1,2 +1,2 @@
-export * from './adapters';
-export { getStorage } from './get-storage';
+export * from './adapters'
+export { getStorage } from './get-storage'

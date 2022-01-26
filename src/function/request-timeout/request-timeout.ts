@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { AnyFunction } from '@oakfinch/ts-extra';
-import { assign } from '../../object/assign';
-import { getPromise } from '../../promise/get-promise';
-import { isObject } from '../../type-guards/is-object';
-import { getTimeout } from './helpers';
-import { IDLE } from './constants';
-import type { RequestCallback, TimeoutType, Idle, AnimationFrame } from './types';
+import type { AnyFunction } from '@oakfinch/ts-extra'
+import { assign } from '../../object/assign'
+import { getPromise } from '../../promise/get-promise'
+import { isObject } from '../../type-guards/is-object'
+import { getTimeout } from './helpers'
+import { IDLE } from './constants'
+import type { RequestCallback, TimeoutType, Idle, AnimationFrame } from './types'
 
 /**
  * A combined interface for setTimeout, requestIdleCallback, and
@@ -60,51 +60,51 @@ import type { RequestCallback, TimeoutType, Idle, AnimationFrame } from './types
  */
 export function requestTimeout(
   fn: RequestCallback<Idle>
-): Promise<void> & { cancel: (options?: { error?: any }) => true };
+): Promise<void> & { cancel: (options?: { error?: any }) => true }
 export function requestTimeout(
   fn: RequestCallback<Idle>,
   type: Idle
-): Promise<void> & { cancel: (options?: { error?: any }) => true };
+): Promise<void> & { cancel: (options?: { error?: any }) => true }
 export function requestTimeout(
   fn: RequestCallback<Idle>,
   options: IdleRequestOptions
-): Promise<void> & { cancel: (options?: { error?: any }) => true };
+): Promise<void> & { cancel: (options?: { error?: any }) => true }
 export function requestTimeout(
   fn: RequestCallback<AnimationFrame>,
   type: AnimationFrame
-): Promise<void> & { cancel: (options?: { error?: any }) => true };
+): Promise<void> & { cancel: (options?: { error?: any }) => true }
 export function requestTimeout(
   fn: RequestCallback<number>,
   type: number
-): Promise<void> & { cancel: (options?: { error?: any }) => true };
+): Promise<void> & { cancel: (options?: { error?: any }) => true }
 export function requestTimeout(
   fn: RequestCallback<number | TimeoutType>,
   typeOrOptions: number | TimeoutType | IdleRequestOptions = IDLE
 ): Promise<void> & { cancel: (options?: { error?: any }) => true } {
-  const { resolve, reject, promise } = getPromise();
+  const { resolve, reject, promise } = getPromise()
   const [type, options] = isObject(typeOrOptions)
     ? ([IDLE, typeOrOptions] as const)
-    : ([typeOrOptions, undefined] as const);
+    : ([typeOrOptions, undefined] as const)
 
-  const [request, clear] = getTimeout(type, options);
+  const [request, clear] = getTimeout(type, options)
   const id = request((...args) => {
     try {
-      (fn as AnyFunction)(...args);
-      resolve();
+      ;(fn as AnyFunction)(...args)
+      resolve()
     } catch (error) {
-      reject(error);
+      reject(error)
     }
-  });
+  })
 
   const cancel = ({ error = false } = {}): true => {
-    clear(id);
+    clear(id)
     if (error) {
-      reject(error);
+      reject(error)
     }
-    return true;
-  };
+    return true
+  }
 
-  return assign(promise, { cancel });
+  return assign(promise, { cancel })
 }
 
-export default requestTimeout;
+export default requestTimeout

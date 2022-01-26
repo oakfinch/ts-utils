@@ -3,6 +3,6 @@ export const STORAGE_TYPES = {
   LOCAL_STORAGE: 'local',
   SESSION_STORAGE: 'session',
   MEMORY: 'memory',
-} as const;
+} as const
 
-export default {};
+export default {}

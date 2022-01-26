@@ -1,19 +1,19 @@
-type Intersection<A, B> = Pick<A, Extract<keyof A, keyof B>> & Pick<B, Extract<keyof B, keyof A>>;
+type Intersection<A, B> = Pick<A, Extract<keyof A, keyof B>> & Pick<B, Extract<keyof B, keyof A>>
 
 /* eslint-disable no-restricted-globals */
 export const getGlobal = (): {
-  [P in keyof Intersection<Window, typeof globalThis>]: Intersection<Window, typeof globalThis>[P];
+  [P in keyof Intersection<Window, typeof globalThis>]: Intersection<Window, typeof globalThis>[P]
 } => {
   if (typeof self !== 'undefined') {
-    return self;
+    return self
   }
   if (typeof window !== 'undefined') {
-    return window;
+    return window
   }
   if (typeof global !== 'undefined') {
-    return global as Intersection<Window, typeof globalThis>;
+    return global as Intersection<Window, typeof globalThis>
   }
-  throw new Error('unable to locate global object');
-};
+  throw new Error('unable to locate global object')
+}
 
-export default getGlobal;
+export default getGlobal

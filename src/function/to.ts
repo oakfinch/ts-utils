@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { isPromise } from '../type-guards/is-promise';
-import { isFunction } from '../type-guards/is-function';
+import { isPromise } from '../type-guards/is-promise'
+import { isFunction } from '../type-guards/is-function'
 
 /**
  * A helper for handling awkward try/catch blocks
@@ -23,7 +23,7 @@ import { isFunction } from '../type-guards/is-function';
  *
  * ```
  */
-export function to<T>(fn: () => Promise<T>): Promise<[T, undefined] | [undefined, unknown]>;
+export function to<T>(fn: () => Promise<T>): Promise<[T, undefined] | [undefined, unknown]>
 /**
  * A helper for handling awkward try/catch blocks
  *
@@ -44,7 +44,7 @@ export function to<T>(fn: () => Promise<T>): Promise<[T, undefined] | [undefined
  *
  * ```
  */
-export function to<T>(fn: () => T): [T, undefined] | [undefined, unknown];
+export function to<T>(fn: () => T): [T, undefined] | [undefined, unknown]
 /**
  * A helper for handling awkward try/catch blocks
  *
@@ -65,8 +65,8 @@ export function to<T>(fn: () => T): [T, undefined] | [undefined, unknown];
  *
  * ```
  */
-export function to<T>(promise: Promise<T>): Promise<[T, undefined] | [undefined, unknown]>;
-export function to<T>(arg: T): [T, undefined];
+export function to<T>(promise: Promise<T>): Promise<[T, undefined] | [undefined, unknown]>
+export function to<T>(arg: T): [T, undefined]
 export function to<T, U0 extends () => Promise<T>, U1 extends () => T>(
   arg: U0 | U1 | Promise<T> | T
 ): [T, undefined] | [undefined, unknown] | Promise<[T, undefined] | [undefined, unknown]> {
@@ -74,22 +74,22 @@ export function to<T, U0 extends () => Promise<T>, U1 extends () => T>(
     return arg.then(
       value => [value, undefined],
       error => [undefined, error]
-    );
+    )
   }
 
   if (isFunction(arg)) {
     try {
-      const value = arg();
+      const value = arg()
       if (isPromise(value)) {
-        return to(value);
+        return to(value)
       }
-      return [value, undefined];
+      return [value, undefined]
     } catch (error) {
-      return [undefined, error];
+      return [undefined, error]
     }
   }
 
-  return [arg, undefined];
+  return [arg, undefined]
 }
 
-export default to;
+export default to

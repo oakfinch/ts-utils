@@ -16,5 +16,5 @@
  * // a is [1, 2, 3, 4, 5]
  * ```
  */
-export const push = <T extends readonly any[], U>(arr: T, item: U): [...T, U] => [...arr, item];
-export default push;
+export const push = <T extends readonly any[], U>(arr: T, item: U): [...T, U] => [...arr, item]
+export default push

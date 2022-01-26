@@ -7,6 +7,6 @@ export const isPrimitive = <T>(
   obj: T | string | number | bigint | boolean | undefined | symbol | null
 ): obj is string | number | bigint | boolean | undefined | symbol | null =>
   ['string', 'number', 'bigint', 'boolean', 'undefined', 'symbol'].includes(typeof obj) ||
-  (typeof obj === 'object' && obj === null);
+  (typeof obj === 'object' && obj === null)
 
-export default isPrimitive;
+export default isPrimitive

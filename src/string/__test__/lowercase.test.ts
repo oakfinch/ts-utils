@@ -1,7 +1,7 @@
-import { lowercase } from '../lowercase';
+import { lowercase } from '../lowercase'
 
 describe('lowercase', () => {
   test('works', () => {
-    expect(lowercase('HELLO WORLD')).toBe('hello world');
-  });
-});
+    expect(lowercase('HELLO WORLD')).toBe('hello world')
+  })
+})

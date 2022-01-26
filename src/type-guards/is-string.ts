@@ -1,4 +1,4 @@
 /** String type guard */
-export const isString = <T>(arg: T | string): arg is string => typeof arg === 'string';
+export const isString = <T>(arg: T | string): arg is string => typeof arg === 'string'
 
-export default isString;
+export default isString

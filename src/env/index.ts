@@ -1,1 +1,1 @@
-export * from './get-global';
+export * from './get-global'

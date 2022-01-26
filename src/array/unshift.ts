@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import type { Value } from '@oakfinch/ts-extra';
+import type { Value } from '@oakfinch/ts-extra'
 
 /**
  * Similar to Array.pop, but returns an array along with the "popped" item
@@ -25,6 +25,6 @@ export const unshift = <T extends readonly any[]>(
 ): T extends readonly [infer T0, ...infer T1] ? [T1, T0] : [Value<T>, Value<T>[]] =>
   [arr[0], arr.slice(1)] as T extends readonly [infer T0, ...infer T1]
     ? [T1, T0]
-    : [Value<T>, Value<T>[]];
+    : [Value<T>, Value<T>[]]
 
-export default unshift;
+export default unshift

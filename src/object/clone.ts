@@ -1,17 +1,17 @@
-import { isObject, isArray, isPrimitive } from '../type-guards';
+import { isObject, isArray, isPrimitive } from '../type-guards'
 
 const init = <T, U>(item: T, initialValue: U, cache: Map<T, T>): T =>
-  cache.set(item, initialValue as unknown as T).get(item) as T;
+  cache.set(item, initialValue as unknown as T).get(item) as T
 
 const jsonClone = <T>(obj: T): T | undefined => {
-  let str = '';
+  let str = ''
   try {
-    str = JSON.stringify(obj);
+    str = JSON.stringify(obj)
   } catch (e) {
-    return undefined;
+    return undefined
   }
-  return JSON.parse(str) as T;
-};
+  return JSON.parse(str) as T
+}
 
 const arrayClone = <T, U extends Map<T, T>>(
   obj: T,
@@ -23,7 +23,7 @@ const arrayClone = <T, U extends Map<T, T>>(
         (acc: T, item) => [...(acc as unknown as unknown[]), clone(item as T)] as unknown as T,
         init(obj, [], cache)
       )
-    : undefined;
+    : undefined
 
 const objectClone = <T, U extends Map<T, T>>(
   obj: T,
@@ -38,25 +38,25 @@ const objectClone = <T, U extends Map<T, T>>(
         }),
         init(obj, {}, cache)
       )
-    : undefined;
+    : undefined
 
 const cloneWithCache = <T, U extends Map<T, T>>(obj: T, cache: U): T => {
   if (isPrimitive(obj)) {
-    return obj;
+    return obj
   }
 
   const result =
     cache.get(obj) ??
     jsonClone(obj) ??
     arrayClone(obj, cache, o => cloneWithCache(o, cache)) ??
-    objectClone(obj, cache, o => cloneWithCache(o, cache));
+    objectClone(obj, cache, o => cloneWithCache(o, cache))
 
   if (typeof result === 'undefined') {
-    throw new Error('could not clone object');
+    throw new Error('could not clone object')
   }
 
-  return result;
-};
+  return result
+}
 
-export const clone = <T>(obj: T): T => cloneWithCache(obj, new Map());
-export default clone;
+export const clone = <T>(obj: T): T => cloneWithCache(obj, new Map())
+export default clone
