@@ -27,6 +27,7 @@ export function partial<
   V extends (...args: [...T, ...U]) => any
 >(fn: V, ...args: T): (...rest: Slice<Parameters<V>, T['length']>) => ReturnType<V>;
 export function partial(fn: AnyFunction, ...args: AnyArray): AnyFunction {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
   return args.length === 0 ? fn : fn.bind(null, ...args);
 }
 

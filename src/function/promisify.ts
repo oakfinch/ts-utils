@@ -66,6 +66,7 @@ export function promisify<T extends AnyFunction>(
 ): (...args: any[]) => Promise<any> {
   return (...args: any[]) =>
     new Promise((resolve, reject) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
       fn(...args, (error: any, ...rest: any[]) => {
         if (error) {
           reject(error);

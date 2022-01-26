@@ -42,7 +42,7 @@ export function pipe<T extends ((...args: any[]) => any)[]>(...fns: T): (...args
   if (fns.length === 1) {
     return fns[0];
   }
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
   return (...args) => fns.reduce((prev, fn, i) => (i === 0 ? fn(...args) : fn(prev)), 0);
 }
 
