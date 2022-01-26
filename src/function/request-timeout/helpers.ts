@@ -1,4 +1,4 @@
-import getGlobal from 'globalthis/shim';
+import { getGlobal } from '../../env';
 import { hasProperty } from '../../type-guards/has-property';
 import { isNumber } from '../../type-guards/is-number';
 import { IDLE, TYPE_MAP } from './constants';

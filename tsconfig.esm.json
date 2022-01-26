@@ -1,3 +1,0 @@
-{
-  "extends": "@oakfinch/tsconfig/tsconfig.esm.json"
-}

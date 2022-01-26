@@ -1,3 +1,11 @@
 {
-  "extends": "@oakfinch/eslint-config/typescript"
+  "extends": "@oakfinch/eslint-config/typescript",
+  "overrides": [
+    {
+      "files": ["rollup.config.js"],
+      "parserOptions": {
+        "sourceType": "module"
+      }
+    }
+  ]
 }

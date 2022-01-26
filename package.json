@@ -3,8 +3,14 @@
   "version": "1.0.24",
   "description": "Utility library with enhanced TypeScript support",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/cjs/index.d.ts",
+  "module": "dist/es/index.js",
+  "types": "dist/es/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
   "sideEffects": false,
   "files": [
     "dist"
@@ -38,24 +44,33 @@
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
     "@oakfinch/commitlint-config": "^2.0.0",
-    "@oakfinch/eslint-config": "^2.0.0",
+    "@oakfinch/eslint-config": "^2.0.10",
     "@oakfinch/jest-config": "^2.0.0",
     "@oakfinch/lint-staged-config": "^2.0.0",
     "@oakfinch/prettier-config": "^2.0.0",
-    "@oakfinch/ts-extra": "^1.0.17",
-    "@oakfinch/tsconfig": "^2.0.0",
+    "@oakfinch/rollup-config": "^2.0.18",
+    "@oakfinch/ts-extra": "^1.0.24",
+    "@oakfinch/tsconfig": "^2.0.6",
     "@types/globalthis": "^1.0.1",
     "@types/jest": "^27.0.2",
+    "@types/whatwg-fetch": "0.0.33",
     "eslint": "^7.32.0",
     "husky": "^7.0.4",
     "jest": "^27.2.4",
     "lint-staged": "^11.2.6",
     "prettier": "^2.4.1",
+    "rollup": "^2.66.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-delete": "^2.0.0",
     "ts-jest": "^27.0.5",
-    "typedoc": "^0.22.4",
+    "typedoc": "^0.22.11",
     "typescript": "^4.4.3"
   },
   "dependencies": {
-    "globalthis": "^1.0.2"
+    "dotenv": "^14.3.0",
+    "rollup-plugin-dotenv": "^0.3.0",
+    "rollup-plugin-mv": "0.0.2",
+    "tslib": "^2.3.1",
+    "whatwg-fetch": "^3.6.2"
   }
 }

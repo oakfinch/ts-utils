@@ -1,3 +1,6 @@
 {
-  "extends": "@oakfinch/tsconfig/tsconfig.cjs.json"
+  "extends": "@oakfinch/tsconfig/tsconfig.esm.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  }
 }
