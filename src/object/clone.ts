@@ -1,11 +1,17 @@
 import { isObject, isArray, isPrimitive } from '../type-guards';
-import { safe } from '../function/safe';
 
 const init = <T, U>(item: T, initialValue: U, cache: Map<T, T>): T =>
   cache.set(item, initialValue as unknown as T).get(item) as T;
 
-const jsonClone = <T>(obj: T): T | undefined =>
-  safe(() => (isObject(obj) || isArray(obj) ? (JSON.parse(JSON.stringify(obj)) as T) : undefined));
+const jsonClone = <T>(obj: T): T | undefined => {
+  let str = '';
+  try {
+    str = JSON.stringify(obj);
+  } catch (e) {
+    return undefined;
+  }
+  return JSON.parse(str) as T;
+};
 
 const arrayClone = <T, U extends Map<T, T>>(
   obj: T,

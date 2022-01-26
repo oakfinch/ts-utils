@@ -4,4 +4,5 @@ module.exports = {
   collectCoverage: true,
   passWithNoTests: true,
   collectCoverageFrom: ['src/**/*.{js,ts}', '!**/__test__/**'],
+  testPathIgnorePatterns: ['<rootDir>/.rollup.cache/'],
 };
