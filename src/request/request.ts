@@ -1,13 +1,15 @@
+import { getGlobal } from '../env/get-global'
 import { FetchError } from './FetchError'
 
 const fetch: Window['fetch'] = async (...args: Parameters<Window['fetch']>) => {
-  if (typeof window === 'undefined' || !window.fetch) {
+  const win = getGlobal()
+  if (typeof win === 'undefined' || !win.fetch) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     await import('whatwg-fetch')
   }
 
-  return window.fetch(...args)
+  return win.fetch(...args)
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

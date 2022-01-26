@@ -1,6 +1,9 @@
 export class FetchError extends Error {
+  status: number
+
   constructor(status: number, body = '') {
-    super(`HTTP Error: ${status}${body ? `\n${body}` : body}`)
+    super(body)
+    this.status = status
   }
 }
 
