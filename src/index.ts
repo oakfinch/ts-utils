@@ -5,6 +5,7 @@ export * from './number';
 export * from './object';
 export * from './promise';
 export * from './request';
+export * from './storage';
 export * from './string';
 export * from './type-guards';
 export * from './events';
