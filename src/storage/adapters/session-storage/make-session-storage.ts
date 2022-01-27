@@ -3,7 +3,7 @@ import { makeLocalStorage } from '../local-storage/make-local-storage'
 import { serialize as srz, deserialize as dsrz } from '../../../object/serialize'
 
 export const makeSessionStorage = ({
-  storage = getGlobal().localStorage,
+  storage = getGlobal().sessionStorage,
   serialize,
   deserialize,
 }: {
