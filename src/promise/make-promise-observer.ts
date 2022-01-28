@@ -1,3 +1,4 @@
+/* eslint-disable no-void */
 import type { AnyPromise } from '@oakfinch/ts-extra'
 import { noop } from '../function/noop'
 
@@ -33,8 +34,12 @@ export const makePromiseObserver = ({
       onChange(promise, [...pending])
 
       promise.then(
-        () => observer.unobserve(promise),
-        () => observer.unobserve(promise)
+        () => {
+          void observer.unobserve(promise)
+        },
+        () => {
+          void observer.unobserve(promise)
+        }
       )
 
       return promise
