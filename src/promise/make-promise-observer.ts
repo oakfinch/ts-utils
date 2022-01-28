@@ -1,3 +1,4 @@
+/* eslint-disable no-void */
 import type { AnyPromise } from '@oakfinch/ts-extra'
 import { remove } from '../array/remove'
 import { noop } from '../function/noop'
@@ -10,53 +11,38 @@ interface PromiseObserver {
 }
 
 export const makePromiseObserver = ({
-  onStart = noop,
-  onEnd = noop,
-  onBeforeAdd = noop,
-  onAdded = noop,
-  onBeforeRemove = noop,
-  onRemoved = noop,
+  onBeforeChange = noop,
+  onChange = noop,
 }: {
-  onStart?: Callback
-  onEnd?: Callback
-  onBeforeAdd?: Callback
-  onAdded?: Callback
-  onBeforeRemove?: Callback
-  onRemoved?: Callback
+  onBeforeChange?: Callback
+  onChange?: Callback
 }): PromiseObserver => {
   const pending: AnyPromise[] = []
+  const removePromise = (promise: AnyPromise) => {
+    if (pending.includes(promise)) {
+      onBeforeChange(promise, pending)
+      remove(promise, pending)
+      onChange(promise, pending)
+      return promise
+    }
+    return undefined
+  }
 
   return {
-    unobserve: promise => {
-      if (pending.includes(promise)) {
-        remove(promise, pending)
-        if (pending.length === 0) {
-          onEnd(promise, pending)
-        }
-        return promise
-      }
-      return undefined
-    },
+    unobserve: promise => removePromise(promise),
     observe: promise => {
-      if (pending.length === 0) {
-        onStart(promise, pending)
-      }
-
-      onBeforeAdd(promise, pending)
+      onBeforeChange(promise, pending)
       pending.push(promise)
-      onAdded(promise, pending)
+      onChange(promise, pending)
 
-      promise.finally(() => {
-        if (pending.includes(promise)) {
-          onBeforeRemove(promise, pending)
-          remove(promise, pending)
-          onRemoved(promise, pending)
-
-          if (pending.length === 0) {
-            onEnd(promise, pending)
-          }
+      void (async () => {
+        try {
+          await promise
+        } catch {
+          // do nothing
         }
-      })
+        void removePromise(promise)
+      })()
 
       return promise
     },
