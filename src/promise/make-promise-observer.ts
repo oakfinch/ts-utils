@@ -1,6 +1,4 @@
-/* eslint-disable no-void */
 import type { AnyPromise } from '@oakfinch/ts-extra'
-import { remove } from '../array/remove'
 import { noop } from '../function/noop'
 
 type Callback = <T extends AnyPromise, U extends AnyPromise[]>(promise: T, pending: U) => void
@@ -17,36 +15,33 @@ export const makePromiseObserver = ({
   onBeforeChange?: Callback
   onChange?: Callback
 }): PromiseObserver => {
-  const pending: AnyPromise[] = []
-  const removePromise = (promise: AnyPromise) => {
-    if (pending.includes(promise)) {
-      onBeforeChange(promise, pending)
-      remove(promise, pending)
-      onChange(promise, pending)
-      return promise
-    }
-    return undefined
-  }
+  const pending = new Set<AnyPromise>()
 
-  return {
-    unobserve: promise => removePromise(promise),
+  const observer: PromiseObserver = {
+    unobserve: promise => {
+      if (pending.has(promise)) {
+        onBeforeChange(promise, [...pending])
+        pending.delete(promise)
+        onChange(promise, [...pending])
+        return promise
+      }
+      return undefined
+    },
     observe: promise => {
-      onBeforeChange(promise, pending)
-      pending.push(promise)
-      onChange(promise, pending)
+      onBeforeChange(promise, [...pending])
+      pending.add(promise)
+      onChange(promise, [...pending])
 
-      void (async () => {
-        try {
-          await promise
-        } catch {
-          // do nothing
-        }
-        void removePromise(promise)
-      })()
+      promise.then(
+        () => observer.unobserve(promise),
+        () => observer.unobserve(promise)
+      )
 
       return promise
     },
-  } as PromiseObserver
+  }
+
+  return observer
 }
 
 export default makePromiseObserver
