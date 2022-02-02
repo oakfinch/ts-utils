@@ -1,9 +1,11 @@
-import type { AnyObject, Length, AnyArray } from '@oakfinch/ts-extra'
+import type { AnyObject, Length, AnyArray, AnyFunction } from '@oakfinch/ts-extra'
 import { isObject } from '../type-guards/is-object'
 import { isArray } from '../type-guards/is-array'
 
 type Freeze<T> = T extends readonly (infer U)[]
   ? Readonly<Length<T> extends never ? U[] : { [P in keyof T]: Freeze<T[P]> }>
+  : T extends AnyFunction
+  ? T
   : T extends AnyObject
   ? { readonly [P in keyof T]: Freeze<T[P]> }
   : T
